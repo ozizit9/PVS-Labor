@@ -1,0 +1,71 @@
+version: "3"
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+      - keycloak
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=mysecretpassword
+      - SPRING_JPA_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=create-drop
+      - SPRING_PORT=3000
+    networks:
+      ohyeah:
+        ipv4_address: "10.56.1.20"
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      ohyeah:
+        ipv4_address: "10.56.1.30"
+  database:
+    image: selimcetin/postgis-swa:1.0
+    container_name: postgis_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: postgres
+    networks:
+      ohyeah:
+        ipv4_address: "10.56.1.40"
+  keycloak:
+    image: selimcetin/swa_keycloak
+    container_name: keycloak
+    ports:
+      - "8080:8080"
+    environment:
+      KC_HOSTNAME: http://localhost:8080/
+      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: true
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      DB_VENDOR: postgres
+      DB_ADDR: database
+      DB_DATABASE: postgres
+      DB_USER: postgres
+      DB_PASSWORD: mysecretpassword
+    depends_on:
+      - database
+    networks:
+      ohyeah:
+        ipv4_address: "10.56.1.50"
+networks:
+  ohyeah:
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.56.1.0/24"

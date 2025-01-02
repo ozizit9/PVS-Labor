@@ -1,0 +1,101 @@
+/* App.css */
+
+/* Body styling */
+body {
+  background-color: #1e1e2e;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Main app container with larger width */
+.app-container {
+  background: #2a2a3c;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
+  max-width: 1200px; /* Increased width */
+  width: 95%;
+  text-align: center;
+  animation: fadeIn 1s ease-out;
+}
+
+/* Header */
+.header {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #00d4ff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Loading and error messages */
+.loading,
+.error {
+  font-size: 1.5rem;
+  color: #ff4d4d;
+  margin: 20px 0;
+}
+
+/* Post list container */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual post card */
+.post-card {
+  background: #3a3a4f;
+  border: 1px solid #4a4a6a;
+  border-radius: 12px;
+  padding: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0px 8px 20px rgba(0, 212, 255, 0.4);
+}
+
+/* Post content */
+.post-content {
+  font-size: 1.5rem;
+  color: #00d4ff;
+  margin-bottom: 15px;
+}
+
+/* Post details */
+.post-location,
+.post-username,
+.post-upvotes,
+.post-downvotes,
+.post-jodel-ids {
+  font-size: 1rem;
+  margin: 8px 0;
+  color: #b0b0d0;
+}
+
+/* No posts message */
+.no-posts {
+  font-size: 1.3rem;
+  color: #b0b0d0;
+  margin-top: 30px;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
