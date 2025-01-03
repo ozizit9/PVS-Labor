@@ -2,6 +2,7 @@
 - Backend: Java/Spring Boot
 - Frontend: React
 - Docker & Docker Compose
+- Keycloak
 
 ## 12-Factor Principles:
 1. Codebase:
